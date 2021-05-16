@@ -1,7 +1,7 @@
 package com.test.thread;
 
 /**
- * 创建线程
+ * 创建线程方法一：继承Thread
  * 1：继承Thread
  * 2：重写run方法
  * 3：创建子类

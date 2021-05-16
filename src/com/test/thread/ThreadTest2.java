@@ -1,5 +1,8 @@
 package com.test.thread;
 
+/**
+ * @author hsir
+ */
 public class ThreadTest2 {
 
     public static void main(String[] args) {
