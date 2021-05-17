@@ -1,0 +1,71 @@
+零、创建线程的多种方式
+1.继承Thread类，重写run
+2.实现Runnable，实现run
+3.实现Callable，实现call，调用FutureTask，可以有返回值（FutureTask.get()）
+4.使用线程池 Executors,使用ExecutorService接收 ===》 建议用ThreadPoolExecutor创建
+    线程池的好处：
+        1.提高响应速度（减少创建新线程的时间）
+        2.降低资源消耗（重复利用线程池中的线程，避免重复创建）
+        3.便于线程管理
+            CorePoolSize: 核心池的大小
+            MaximumPoolSize: 最大线程数
+            KeepAliveTime: 线程没有任务时最多保持多长时间后会终止
+
+一、线程的方法：
+1.start
+2.run
+3.yield
+4.stop
+5.join  阻塞当前线程，内部用wait实现
+6.get/setName
+7.sleep(long ms)  毫秒
+8.isAlive
+9.isDaemon  守护线程
+
+
+
+// https://www.cnblogs.com/IUbanana/p/7112296.html
+二、线程的生命周期
+1.新建 new
+2.就绪 start
+3.运行 run   ---》》》就绪（yield）
+4.阻塞 join  ---》》》调用sleep、调用join、等待同步锁、wait（Object类）
+5.死亡 stop  ---》》》执行完run、调用stop、出现异常
+
+三、同步（三种方式）
+synchronize
+可以用在代码块或者方法中
+// 1.同步代码块
+synchronize (this) {
+
+}
+
+// 2.同步方法 （在继承Thread中需要设定为static）
+synchronize void run () {
+//
+}
+
+// 3.Lock
+lock.lock
+lock.unlock
+
+
+四、死锁
+1.相互持有
+2.如何避免：
+    1）减少同步资源
+    2）避免嵌套（相互调用）
+
+
+五、线程通信方法（必须使用在同步方法/代码块中）
+1.wait
+2.notify  唤醒wait的一个线程（有多个唤醒优先级高的一个）
+3.notifyAll  唤醒所有wait的线程
+
+六、sleep和wait的异同
+相同点：
+    1.都可以阻塞线程
+不同点：
+    1.sleep是Thread类中的方法，wait是Object类中的方法
+    2.sleep在任意地方调，wait只能用在同步代码中
+    3.sleep不会释放锁，wait会释放锁
